@@ -1,1 +1,2 @@
-const id: number = 2;
+const id = 2
+console.log(id)
