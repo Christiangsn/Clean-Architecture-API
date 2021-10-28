@@ -6,7 +6,16 @@
   "repository": "git@github.com:Christiangsn/ddd-designPatterns-registers.git",
   "author": "christianguimaraes1996@gmail.com",
   "license": "MIT",
+  "scripts": {
+    "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
+    "start": "node -r dotenv/config dist/server.js",
+    "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify -r dotenv/config src/server.ts"
+  },
   "devDependencies": {
-    "git-commit-msg-linter": "^3.2.8"
+    "@types/node": "^16.11.6",
+    "git-commit-msg-linter": "^3.2.8",
+    "ts-node": "^10.4.0",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.4.4"
   }
 }
