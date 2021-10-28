@@ -5,5 +5,8 @@
   "main": "server.ts",
   "repository": "git@github.com:Christiangsn/ddd-designPatterns-registers.git",
   "author": "christianguimaraes1996@gmail.com",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "git-commit-msg-linter": "^3.2.8"
+  }
 }
