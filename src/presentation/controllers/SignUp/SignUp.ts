@@ -1,6 +1,6 @@
 import { HttpRequest, HttpResponse, ProtocolControllers, IEmailValidator, AddAccount } from './SignUpProtocols'
 import { IMissingParamError, IInvalidParamsError } from '../../errors'
-import { badRequest, serverError } from '../../helpers/httpHelper'
+import { badRequest, serverError, ok } from '../../helpers/httpHelper'
 
 export class SignUpController implements ProtocolControllers {
   constructor (
@@ -33,10 +33,7 @@ export class SignUpController implements ProtocolControllers {
         password
       })
 
-      return {
-        statusCode: 200,
-        body: account
-      }
+      return ok(account)
     } catch (error) {
       return serverError()
     }
