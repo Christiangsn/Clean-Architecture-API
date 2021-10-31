@@ -1,7 +1,6 @@
-import { HttpRequest, HttpResponse, ProtocolControllers, IEmailValidator } from '../protocol/'
-import { IMissingParamError, IInvalidParamsError } from '../errors/'
-import { badRequest, serverError } from '../helpers/httpHelper'
-import { AddAccount } from '../../domain/useCases/AddAccount'
+import { HttpRequest, HttpResponse, ProtocolControllers, IEmailValidator, AddAccount } from './SignUpProtocols'
+import { IMissingParamError, IInvalidParamsError } from '../../errors'
+import { badRequest, serverError } from '../../helpers/httpHelper'
 
 export class SignUpController implements ProtocolControllers {
   constructor (
