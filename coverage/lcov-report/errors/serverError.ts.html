@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for errors/InvalidParamsError.ts</title>
+    <title>Code coverage report for errors/serverError.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">errors</a> InvalidParamsError.ts</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">errors</a> serverError.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -73,14 +73,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">class IInvalidParamsError extends Error {
-  constructor (paramName: string) {
-    super(`Invalid param: ${paramName}`)
-    this.name = 'MissingParamError'
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">class IServerError extends Error {
+  constructor () {
+    super('Internal Server Error')
+    this.name = 'IServerError'
   }
 }
 &nbsp;
-export { IInvalidParamsError }
+export { IServerError }
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
