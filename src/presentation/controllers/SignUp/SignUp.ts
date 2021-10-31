@@ -8,7 +8,7 @@ export class SignUpController implements ProtocolControllers {
     private addAccount: AddAccount
   ) {}
 
-  handle (httpRequest: HttpRequest): HttpResponse {
+  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const { name, email, password, passwordConfirm } = httpRequest.body
       const requiredFields = ['name', 'email', 'password', 'passwordConfirm']
@@ -27,7 +27,7 @@ export class SignUpController implements ProtocolControllers {
         return badRequest(new IInvalidParamsError('email'))
       }
 
-      const account = this.addAccount.add({
+      const account = await this.addAccount.add({
         name,
         email,
         password
