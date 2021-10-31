@@ -11,7 +11,7 @@ export class SignUpController implements ProtocolControllers {
 
   handle (httpRequest: HttpRequest): HttpResponse {
     try {
-      const { email, password, passwordConfirm } = httpRequest.body
+      const { name, email, password, passwordConfirm } = httpRequest.body
       const requiredFields = ['name', 'email', 'password', 'passwordConfirm']
       for (const field of requiredFields) {
         if (!httpRequest.body[field]) {
@@ -27,6 +27,12 @@ export class SignUpController implements ProtocolControllers {
       if (!isValid) {
         return badRequest(new IInvalidParamsError('email'))
       }
+
+      this.addAccount.add({
+        name,
+        email,
+        password
+      })
     } catch (error) {
       return serverError()
     }
