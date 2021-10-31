@@ -14,6 +14,10 @@ export class SignUpController implements ProtocolControllers {
         }
       }
 
+      if (httpRequest.body.password !== httpRequest.body.passwordConfirm) {
+        return badRequest(new IInvalidParamsError('passwordConfirm'))
+      }
+
       const isValid = this.emailValidator.isValid(httpRequest.body.email)
       if (!isValid) {
         return badRequest(new IInvalidParamsError('email'))
