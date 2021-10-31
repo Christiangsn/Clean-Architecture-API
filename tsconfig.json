@@ -19,10 +19,13 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {   
-      "@controllers/*": ["./src/controllers/*"]
+      "@modules/*": ["modules/*"],
+      "@config/*": ["config/*"],
+      "@shared/*": ["shared/*"]
       }
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "/.eslintrc.json",
   ],
 }
