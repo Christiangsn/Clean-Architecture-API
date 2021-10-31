@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1635655924803" clover="3.2.0">
-  <project timestamp="1635655924803" name="All files">
-    <metrics statements="19" coveredstatements="16" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2" elements="23" coveredelements="20" complexity="0" loc="19" ncloc="19" packages="3" files="3" classes="3"/>
+<coverage generated="1635656270453" clover="3.2.0">
+  <project timestamp="1635656270453" name="All files">
+    <metrics statements="21" coveredstatements="18" conditionals="3" coveredconditionals="3" methods="2" coveredmethods="2" elements="26" coveredelements="23" complexity="0" loc="21" ncloc="21" packages="3" files="3" classes="3"/>
     <package name="controllers">
-      <metrics statements="13" coveredstatements="13" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+      <metrics statements="15" coveredstatements="15" conditionals="3" coveredconditionals="3" methods="2" coveredmethods="2"/>
       <file name="SignUp.ts" path="C:\Users\chris\Estudos\design-patterns-DDD-Registers\src\presentation\controllers\SignUp.ts">
-        <metrics statements="13" coveredstatements="13" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+        <metrics statements="15" coveredstatements="15" conditionals="3" coveredconditionals="3" methods="2" coveredmethods="2"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
-        <line num="6" count="6" type="stmt"/>
-        <line num="9" count="6" type="stmt"/>
-        <line num="10" count="6" type="stmt"/>
-        <line num="11" count="6" type="stmt"/>
-        <line num="12" count="18" type="cond" truecount="1" falsecount="0"/>
+        <line num="6" count="7" type="stmt"/>
+        <line num="9" count="7" type="stmt"/>
+        <line num="10" count="7" type="stmt"/>
+        <line num="11" count="7" type="stmt"/>
+        <line num="12" count="22" type="cond" truecount="1" falsecount="0"/>
         <line num="13" count="3" type="stmt"/>
-        <line num="17" count="3" type="stmt"/>
-        <line num="18" count="2" type="cond" truecount="1" falsecount="0"/>
-        <line num="19" count="1" type="stmt"/>
-        <line num="22" count="1" type="stmt"/>
+        <line num="17" count="4" type="cond" truecount="1" falsecount="0"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="21" count="3" type="stmt"/>
+        <line num="22" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
       </file>
     </package>
     <package name="errors">
