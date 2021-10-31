@@ -1,9 +1,13 @@
 import { HttpRequest, HttpResponse, ProtocolControllers, IEmailValidator } from '../protocol/'
 import { IMissingParamError, IInvalidParamsError } from '../errors/'
 import { badRequest, serverError } from '../helpers/httpHelper'
+import { AddAccount } from '../../domain/useCases/AddAccount'
 
 export class SignUpController implements ProtocolControllers {
-  constructor (private emailValidator: IEmailValidator) {}
+  constructor (
+    private emailValidator: IEmailValidator,
+    private addAccount: AddAccount
+  ) {}
 
   handle (httpRequest: HttpRequest): HttpResponse {
     try {
