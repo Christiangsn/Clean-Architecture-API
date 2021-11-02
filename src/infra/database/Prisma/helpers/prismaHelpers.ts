@@ -1,13 +1,19 @@
 import { PrismaClient } from '@prisma/client'
 
-const prisma = new PrismaClient()
+class PrismaHelpers {
+  client: PrismaClient
 
-export const PrismaHelper = {
-  client: null as PrismaClient,
-  async connect (): Promise<void> {
-    this.client = await prisma.$connect()
-  },
+  constructor () {
+    this.client = new PrismaClient()
+  }
+
+  async connection (): Promise<void> {
+    this.client = new PrismaClient()
+  }
+
   async disconnect (): Promise<void> {
-    await this.client.disconnect()
+    this.client.$disconnect()
   }
 }
+
+export default new PrismaHelpers().client
