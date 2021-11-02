@@ -4,7 +4,7 @@ class PrismaHelpers {
   client: PrismaClient
 
   constructor () {
-    this.client = new PrismaClient()
+    this.connection()
   }
 
   async connection (): Promise<void> {
@@ -13,7 +13,8 @@ class PrismaHelpers {
 
   async disconnect (): Promise<void> {
     this.client.$disconnect()
+    this.client = null
   }
 }
 
-export default new PrismaHelpers().client
+export default new PrismaHelpers().connection

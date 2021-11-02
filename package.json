@@ -14,8 +14,8 @@
     "test:verbose": "jest --passWithNoTests --runInBand",
     "test:unit": "yarn test -- --watch -c jest-unit-config.js",
     "test:integration": "yarn -r tsconfig-paths/register test -- --watch -c jest-integration-config.js",
-    "test:staged": "yarn test -- --findRelatedTests",
-    "test:ci": "yarn test -- --coverage"
+    "test:staged": "yarn -r tsconfig-paths/register test -- --findRelatedTests",
+    "test:ci": "yarn -r tsconfig-paths/register test -- --coverage"
   },
   "devDependencies": {
     "@babel/cli": "^7.16.0",
