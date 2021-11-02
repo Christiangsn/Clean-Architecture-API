@@ -21,7 +21,12 @@
     "paths": {   
       "@modules/*": ["modules/*"],
       "@config/*": ["config/*"],
-      "@shared/*": ["shared/*"]
+      "@shared/*": ["shared/*"],
+      "@domain/*": ["./src/domain/*"],
+      "@infra/*": ["./src/infra/*"],
+      "@presentation/*": ["./src/presentation/*"],
+      "@util/*": ["./src/util/*"],
+      "@data/*": [".src/data/*"]
       }
   },
   "include": [
