@@ -7,7 +7,7 @@ describe('Cors Middleware', () => {
       res.send()
     })
     await request(app)
-      .get('/cors')
+      .get('/api/cors')
       .expect('acess-control-allow-origin', '*')
       .expect('acess-control-allow-methods', '*')
       .expect('acess-control-allow-headers', '*')
