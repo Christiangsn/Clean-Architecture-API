@@ -1,4 +1,4 @@
-export * from '../../../domain/useCases/AddAccount'
-export * from '../../../domain/entities/Account'
+export * from '@domain/contracts/addAccount'
+export * from '@domain/entities/addAccountEntity'
 export * from '../../protocols/encripter'
 export * from '../../protocols/addAccountRepository'
