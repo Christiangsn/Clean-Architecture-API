@@ -1,5 +1,6 @@
 import db from '../helpers/prismaHelpers'
 import { AccountPrismaRepository } from './Account'
+import { AddAccountFactory } from '../../../../domain/factories/addAccount'
 
 describe('Account SqLite Repository', () => {
   beforeAll(async () => {
@@ -16,8 +17,13 @@ describe('Account SqLite Repository', () => {
     })
   })
 
+  const addFactory = (): AddAccountFactory => {
+    return new AddAccountFactory()
+  }
+
   const makeSut = (): AccountPrismaRepository => {
-    return new AccountPrismaRepository()
+    const factory = addFactory()
+    return new AccountPrismaRepository(factory)
   }
 
   test('Should return an account on success', async () => {
