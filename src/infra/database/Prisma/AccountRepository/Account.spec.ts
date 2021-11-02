@@ -10,6 +10,12 @@ describe('Account SqLite Repository', () => {
     db.$disconnect()
   })
 
+  beforeEach(async () => {
+    await db.user.updateMany({
+      data: {}
+    })
+  })
+
   const makeSut = (): AccountPrismaRepository => {
     return new AccountPrismaRepository()
   }
