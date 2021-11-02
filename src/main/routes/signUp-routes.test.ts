@@ -1,7 +1,33 @@
 import request from 'supertest'
 import app from '../app'
+import db from '../../infra/database/Prisma/helpers/prismaHelpers'
+import { AccountPrismaRepository } from '../../infra/database/Prisma/AccountRepository/Account'
+import { AddAccountFactory } from '../../domain/factories/addAccount'
 
 describe('SignUp Routes', () => {
+  beforeAll(async () => {
+    db.$connect()
+  })
+
+  afterAll(async () => {
+    db.$disconnect()
+  })
+
+  beforeEach(async () => {
+    await db.user.updateMany({
+      data: {}
+    })
+  })
+
+  const addFactory = (): AddAccountFactory => {
+    return new AddAccountFactory()
+  }
+
+  const makeSut = (): AccountPrismaRepository => {
+    const factory = addFactory()
+    return new AccountPrismaRepository(factory)
+  }
+
   test('Should returns an account on success', async () => {
     await request(app)
       .post('/api/signup')
