@@ -1,18 +1,18 @@
-import db from '../helpers/prismaHelpers'
+import { Prisma as db } from '../helpers/prismaHelpers'
 import { AccountPrismaRepository } from './Account'
 import { AddAccountFactory } from '../../../../domain/factories/addAccount'
 
 describe('Account SqLite Repository', () => {
   beforeAll(async () => {
-    db.$connect()
+    await db.connection()
   })
 
   afterAll(async () => {
-    db.$disconnect()
+    await db.disconnect()
   })
 
   beforeEach(async () => {
-    await db.user.updateMany({
+    await db.client.user.updateMany({
       data: {}
     })
   })

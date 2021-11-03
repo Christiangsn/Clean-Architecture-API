@@ -1,5 +1,3 @@
-import { pathsToModuleNameMapper } from 'ts-jest/utils';
-import {compilerOptions} from './tsconfig.json'
 
 module.exports =  {
   roots: ['<rootDir>/src'],
@@ -20,7 +18,7 @@ module.exports =  {
   moduleDirectories: [
     "node_modules"
   ],
-  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
-    prefix: '<rootDir>/src/',
-  }),
+  moduleNameMapper: {
+    "^src/(.*)$": "<rootDir>/$1"
+  }
 }

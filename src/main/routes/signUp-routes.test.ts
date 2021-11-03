@@ -1,20 +1,20 @@
 import request from 'supertest'
 import app from '../app'
-import db from '../../infra/database/Prisma/helpers/prismaHelpers'
+import { Prisma } from '../../infra/database/Prisma/helpers/prismaHelpers'
 import { AccountPrismaRepository } from '../../infra/database/Prisma/AccountRepository/Account'
 import { AddAccountFactory } from '../../domain/factories/addAccount'
 
 describe('SignUp Routes', () => {
   beforeAll(async () => {
-    db.$connect()
+    await Prisma.connection()
   })
 
   afterAll(async () => {
-    db.$disconnect()
+    await Prisma.disconnect()
   })
 
   beforeEach(async () => {
-    await db.user.updateMany({
+    await Prisma.client.user.updateMany({
       data: {}
     })
   })
