@@ -2,13 +2,13 @@ import { AddAccountRepository } from '../../../../data/protocols/addAccountRepos
 import { AccountModel } from '@domain/contracts/addAccount'
 import { AddAccountModel } from '../../../../domain/contracts/addAccount'
 import { AddAccountFactory } from '@domain/factories/addAccount'
-import db from '../helpers/prismaHelpers'
+import { Prisma } from '../helpers/prismaHelpers'
 
 export class AccountPrismaRepository implements AddAccountRepository {
   constructor (private accountFactory: AddAccountFactory) {}
 
   async add (accountData: AddAccountModel): Promise<AccountModel> {
-    const resultAccount = await db.user.create({
+    const resultAccount = await Prisma.client.user.create({
       data: accountData
     })
     const account = this.accountFactory.addFactory(resultAccount)

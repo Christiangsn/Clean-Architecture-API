@@ -4,11 +4,12 @@ class PrismaHelpers {
   client: PrismaClient
 
   constructor () {
+    this.client = new PrismaClient()
     this.connection()
   }
 
   async connection (): Promise<void> {
-    this.client = new PrismaClient()
+    this.client.$connect()
   }
 
   async disconnect (): Promise<void> {
@@ -17,4 +18,4 @@ class PrismaHelpers {
   }
 }
 
-export default new PrismaHelpers().connection
+export const Prisma = new PrismaHelpers()
