@@ -15,6 +15,7 @@ class PrismaHelpers {
   async disconnect (): Promise<void> {
     this.client.$disconnect()
     this.client = null
+    this.connection()
   }
 }
 
