@@ -1,4 +1,3 @@
-
 module.exports =  {
   roots: ['<rootDir>/src'],
   collectCoverageFrom: [
@@ -15,10 +14,11 @@ module.exports =  {
     "<rootDir>",
     "/home/some/other/path"
   ],
-  moduleDirectories: [
-    "node_modules"
-  ],
   moduleNameMapper: {
-    "^src/(.*)$": "<rootDir>/$1"
+    '@presentation/(.*)': '<rootDir>/src/presentation/$1',
+    '@data/(.*)': '<rootDir>/src/data/$1',
+    '@util/(.*)': '<rootDir>/src/util/$1',
+    '@infra/(.*)': '<rootDir>/src/infra/$1',
+    '@domain/(.*)': '<rootDir>/src/domain/$1'     
   }
 }

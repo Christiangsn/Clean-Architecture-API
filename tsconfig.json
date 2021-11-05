@@ -30,4 +30,5 @@
     "src/**/*",
     "/.eslintrc.json",
   ],
+  "exclude": ["node_modules", "__tests__"]
 }
