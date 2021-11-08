@@ -35,7 +35,7 @@ export class SignUpController implements ProtocolControllers {
 
       return ok(account)
     } catch (error) {
-      return serverError()
+      return serverError(error)
     }
   }
 }
