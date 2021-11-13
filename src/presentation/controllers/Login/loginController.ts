@@ -1,3 +1,4 @@
+import { Authentication } from '@domain/contracts/authentication'
 import { IInvalidParamsError, IMissingParamError } from '@presentation/errors'
 import { badRequest, serverError } from '@presentation/helpers/httpHelper'
 import { HttpRequest, HttpResponse, ProtocolControllers } from '../../protocol'
@@ -5,7 +6,8 @@ import { IEmailValidator } from '../SignUp/SignUpProtocols'
 
 class LoginController implements ProtocolControllers {
   constructor (
-        private emailValidator: IEmailValidator
+        private emailValidator: IEmailValidator,
+        private authentication: Authentication
   ) {}
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
@@ -23,6 +25,8 @@ class LoginController implements ProtocolControllers {
       if (!this.emailValidator.isValid(email)) {
         return new Promise(resolve => resolve(badRequest(new IInvalidParamsError('email'))))
       }
+
+      await this.authentication.auth(email, password)
     } catch (error) {
       return serverError(error)
     }
