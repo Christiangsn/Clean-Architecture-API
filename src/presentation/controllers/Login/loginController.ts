@@ -1,6 +1,6 @@
 import { Authentication } from '@domain/contracts/authentication'
 import { IInvalidParamsError, IMissingParamError } from '@presentation/errors'
-import { badRequest, serverError } from '@presentation/helpers/httpHelper'
+import { anauthorized, badRequest, serverError } from '@presentation/helpers/httpHelper'
 import { HttpRequest, HttpResponse, ProtocolControllers } from '../../protocol'
 import { IEmailValidator } from '../SignUp/SignUpProtocols'
 
@@ -25,7 +25,11 @@ class LoginController implements ProtocolControllers {
         return badRequest(new IInvalidParamsError('email'))
       }
 
-      await this.authentication.auth(email, password)
+      const accessToken = await this.authentication.auth(email, password)
+
+      if (!accessToken) {
+        return anauthorized()
+      }
     } catch (error) {
       return serverError(error)
     }
