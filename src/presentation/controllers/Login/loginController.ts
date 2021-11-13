@@ -1,6 +1,6 @@
 import { Authentication } from '@domain/contracts/authentication'
 import { IInvalidParamsError, IMissingParamError } from '@presentation/errors'
-import { anauthorized, badRequest, serverError } from '@presentation/helpers/httpHelper'
+import { anauthorized, badRequest, ok, serverError } from '@presentation/helpers/httpHelper'
 import { HttpRequest, HttpResponse, ProtocolControllers } from '../../protocol'
 import { IEmailValidator } from '../SignUp/SignUpProtocols'
 
@@ -30,6 +30,10 @@ class LoginController implements ProtocolControllers {
       if (!accessToken) {
         return anauthorized()
       }
+
+      return ok({
+        accessToken: 'any_token'
+      })
     } catch (error) {
       return serverError(error)
     }
