@@ -1,5 +1,5 @@
 import { HttpRequest, HttpResponse, ProtocolControllers, IEmailValidator, AddAccount, IValidation } from './SignUpProtocols'
-import { IMissingParamError, IInvalidParamsError } from '../../errors'
+import { IInvalidParamsError } from '../../errors'
 import { badRequest, serverError, ok } from '../../helpers/httpHelper'
 
 export class SignUpController implements ProtocolControllers {
@@ -18,12 +18,6 @@ export class SignUpController implements ProtocolControllers {
       }
 
       const { name, email, password, passwordConfirm } = httpRequest.body
-      const requiredFields = ['name', 'email', 'password', 'passwordConfirm']
-      for (const field of requiredFields) {
-        if (!httpRequest.body[field]) {
-          return badRequest(new IMissingParamError(field))
-        }
-      }
 
       if (password !== passwordConfirm) {
         return badRequest(new IInvalidParamsError('passwordConfirm'))
