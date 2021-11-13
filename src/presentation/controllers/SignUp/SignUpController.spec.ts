@@ -154,7 +154,7 @@ describe('SignUpController', () => {
     }
     const httpRequest = await sut.handle(hhtRequest)
     expect(httpRequest.statusCode).toBe(500)
-    expect(httpRequest.body).toEqual(new IServerError())
+    expect(httpRequest.body).toEqual(new IServerError(null))
   })
 
   test('should call AddAccount with correct values', async () => {
@@ -195,7 +195,7 @@ describe('SignUpController', () => {
     }
     const httpRequest = await sut.handle(hhtRequest)
     expect(httpRequest.statusCode).toBe(500)
-    expect(httpRequest.body).toEqual(new IServerError())
+    expect(httpRequest.body).toEqual(new IServerError(null))
   })
 
   // Caso o usuario for criado
