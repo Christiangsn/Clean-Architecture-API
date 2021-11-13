@@ -1,4 +1,4 @@
-import { IMissingParamError } from '@presentation/errors'
+import { IInvalidParamsError, IMissingParamError } from '@presentation/errors'
 import { badRequest } from '@presentation/helpers/httpHelper'
 import { HttpRequest, HttpResponse, ProtocolControllers } from '../../protocol'
 import { IEmailValidator } from '../SignUp/SignUpProtocols'
@@ -17,7 +17,9 @@ class LoginController implements ProtocolControllers {
       return new Promise(resolve => resolve(badRequest(new IMissingParamError('password'))))
     }
 
-    this.emailValidator.isValid(httpRequest.body.email)
+    if (this.emailValidator.isValid(httpRequest.body.email)) {
+      return new Promise(resolve => resolve(badRequest(new IInvalidParamsError('email'))))
+    }
   }
 }
 
