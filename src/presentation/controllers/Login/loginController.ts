@@ -13,17 +13,16 @@ class LoginController implements ProtocolControllers {
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const { email, password } = httpRequest.body
+      const requiredFields = ['email', 'password']
 
-      if (!email) {
-        return new Promise(resolve => resolve(badRequest(new IMissingParamError('email'))))
-      }
-
-      if (!password) {
-        return new Promise(resolve => resolve(badRequest(new IMissingParamError('password'))))
+      for (const field of requiredFields) {
+        if (!httpRequest.body[field]) {
+          return badRequest(new IMissingParamError(field))
+        }
       }
 
       if (!this.emailValidator.isValid(email)) {
-        return new Promise(resolve => resolve(badRequest(new IInvalidParamsError('email'))))
+        return badRequest(new IInvalidParamsError('email'))
       }
 
       await this.authentication.auth(email, password)
