@@ -1,5 +1,5 @@
 import { LoginController } from './loginController'
-import { anauthorized, badRequest, serverError } from '../../helpers/httpHelper'
+import { anauthorized, badRequest, ok, serverError } from '../../helpers/httpHelper'
 import { IInvalidParamsError, IMissingParamError } from '@presentation/errors'
 import { IEmailValidator } from '../SignUp/SignUpProtocols'
 import { Authentication } from '@domain/contracts/authentication'
@@ -143,5 +143,19 @@ describe('', () => {
     }
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse).toEqual(serverError(new Error()))
+  })
+
+  test('Sould return 200 if valid credentials are provided', async () => {
+    const { sut } = makeSut()
+    const httpRequest = {
+      body: {
+        email: 'any_email@mail.com',
+        password: 'any_password'
+      }
+    }
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual(ok({
+      accessToken: 'any_token'
+    }))
   })
 })
