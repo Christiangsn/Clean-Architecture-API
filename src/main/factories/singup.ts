@@ -3,6 +3,7 @@ import { DbAddAccount } from '@data/useCases/addAccount/dbAddAccount'
 import { EmailValidatorAdapter } from '@util/emailValidatorAdapter'
 import { BcryptAdapter } from '@infra/criptografy/bscryptAdapter'
 import { AccountPrismaRepository } from '@infra/database/Prisma/AccountRepository/Account'
+import { LogPrismaRepository } from '@infra/database/Prisma/LogRepository/log'
 import { AddAccountFactory } from '@domain/factories/addAccount'
 import { ProtocolControllers } from '@presentation/protocol/controller'
 import { LogControllerDecorator } from '../decorators/log'
@@ -14,7 +15,8 @@ export const makeSignUpController = (): ProtocolControllers => {
   const accountPrismaRepository = new AccountPrismaRepository(addAccountFactory)
   const dbAddAccount = new DbAddAccount(bcryptAdapter, accountPrismaRepository)
   const signUpController = new SignUpController(emailValidatorAdapter, dbAddAccount)
-  const logControllerDecorator = new LogControllerDecorator(signUpController)
+  const logPrismaRepository = new LogPrismaRepository()
+  const logControllerDecorator = new LogControllerDecorator(signUpController, logPrismaRepository)
 
   return logControllerDecorator
 }

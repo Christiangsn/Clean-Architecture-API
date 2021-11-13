@@ -12,6 +12,8 @@ export class AccountPrismaRepository implements AddAccountRepository {
       data: accountData
     })
     const account = this.accountFactory.addFactory(resultAccount)
-    return account
+    const accounts = await Prisma.client.user.findFirst()
+    console.log(account)
+    return accounts.map(result => result.ops[0])
   }
 }
