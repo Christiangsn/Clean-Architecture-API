@@ -7,6 +7,7 @@ import { LogPrismaRepository } from '@infra/database/Prisma/LogRepository/log'
 import { AddAccountFactory } from '@domain/factories/addAccount'
 import { ProtocolControllers } from '@presentation/protocol/controller'
 import { LogControllerDecorator } from '../decorators/log'
+import { makeSignUpValidation } from './validations/signUpValidation'
 
 export const makeSignUpController = (): ProtocolControllers => {
   const emailValidatorAdapter = new EmailValidatorAdapter()
@@ -14,7 +15,8 @@ export const makeSignUpController = (): ProtocolControllers => {
   const addAccountFactory = new AddAccountFactory()
   const accountPrismaRepository = new AccountPrismaRepository(addAccountFactory)
   const dbAddAccount = new DbAddAccount(bcryptAdapter, accountPrismaRepository)
-  const signUpController = new SignUpController(emailValidatorAdapter, dbAddAccount)
+
+  const signUpController = new SignUpController(emailValidatorAdapter, dbAddAccount, makeSignUpValidation())
   const logPrismaRepository = new LogPrismaRepository()
   const logControllerDecorator = new LogControllerDecorator(signUpController, logPrismaRepository)
 
