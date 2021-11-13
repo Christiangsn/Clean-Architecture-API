@@ -15,3 +15,11 @@ model User {
 
   @@map("users")
 }
+
+model logsError {
+  id              String       @id       @default(uuid())
+  stack           String   
+  created_at      DateTime               @default(now())
+
+  @@map("log_erros")
+}
