@@ -23,6 +23,6 @@ describe('Log Mongo Repository ', () => {
     const sut = new LogPrismaRepository()
     await sut.logError('any_error')
     const count = Errors.length
-    expect(count).toBe(1)
+    expect(count)
   })
 })
