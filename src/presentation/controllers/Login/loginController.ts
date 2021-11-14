@@ -1,5 +1,5 @@
 import { Authentication } from '@domain/contracts/authentication'
-import { anauthorized, badRequest, ok, serverError } from '@presentation/helpers/httpHelper'
+import { anauthorized, badRequest, ok, serverError } from '@presentation/helpers/http/httpHelper'
 import { HttpRequest, HttpResponse, ProtocolControllers } from '../../protocol'
 import { IValidation } from '../SignUp/SignUpProtocols'
 

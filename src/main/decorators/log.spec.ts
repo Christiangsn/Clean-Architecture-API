@@ -1,6 +1,6 @@
 import { LogControllerDecorator } from './log'
 import { HttpRequest, HttpResponse, ProtocolControllers } from '@presentation/protocol/'
-import { serverError } from '@presentation/helpers/httpHelper'
+import { serverError } from '@presentation/helpers/http/httpHelper'
 import { LogErrorRepository } from '@data/protocols/logErrorRepository'
 
 const makeLogErrorRepositoryStub = (): LogErrorRepository => {
