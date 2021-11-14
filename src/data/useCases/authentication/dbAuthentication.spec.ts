@@ -1,4 +1,5 @@
 import { HashCompare } from '@data/protocols/criptografy/hash'
+import { TokenGenerator } from '@data/protocols/criptografy/token'
 import { loadAccountByEmailRepository } from '@data/protocols/database/loadAccountByEmailRepository'
 import { AccountModel } from '../addAccount/dbAddAccountProtocols'
 import { DbAuthentication } from './dbAuthentication'
@@ -28,20 +29,32 @@ const makeHashCompare = (): HashCompare => {
   return new HashCompareStub()
 }
 
+const makeTokenGenerator = (): TokenGenerator => {
+  class TokenGeneratorStub implements TokenGenerator {
+    async generate (id: string): Promise<string> {
+      return 'any_token'
+    }
+  }
+  return new TokenGeneratorStub()
+}
+
 interface SutTypes {
   sut: DbAuthentication,
   loadAccountByEmailRepositoryStub: loadAccountByEmailRepository,
-  hashCompareStub: HashCompare
+  hashCompareStub: HashCompare,
+  tokenGeneratorStub: TokenGenerator
 }
 
 const makeSut = (): SutTypes => {
   const loadAccountByEmailRepositoryStub = makeLoadAccountByEmailRepository()
+  const tokenGeneratorStub = makeTokenGenerator()
   const hashCompareStub = makeHashCompare()
-  const sut = new DbAuthentication(loadAccountByEmailRepositoryStub, hashCompareStub)
+  const sut = new DbAuthentication(loadAccountByEmailRepositoryStub, hashCompareStub, tokenGeneratorStub)
   return {
     sut,
     loadAccountByEmailRepositoryStub,
-    hashCompareStub
+    hashCompareStub,
+    tokenGeneratorStub
   }
 }
 
@@ -86,5 +99,12 @@ describe('DbAuthentication UseCase', () => {
     jest.spyOn(hashCompareStub, 'compare').mockReturnValueOnce(new Promise(resolve => resolve(false)))
     const acessToken = await sut.auth({ email: 'any_mail@mail.com', password: 'any_password' })
     expect(acessToken).toBeNull()
+  })
+
+  test('Should call tokenGenerator with correct id', async () => {
+    const { sut, tokenGeneratorStub } = makeSut()
+    const generateSpy = jest.spyOn(tokenGeneratorStub, 'generate')
+    await sut.auth({ email: 'any_mail@mail.com', password: 'any_password' })
+    expect(generateSpy).toHaveBeenCalledWith('any_id')
   })
 })
