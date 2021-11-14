@@ -8,7 +8,7 @@ export class SignUpController implements ProtocolControllers {
   ) {}
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
-    const { name, email, password } = httpRequest.body
+    const { name, email, password, passwordConfirm } = httpRequest.body
 
     try {
       const error = this.validation.validate(httpRequest.body)
@@ -25,6 +25,7 @@ export class SignUpController implements ProtocolControllers {
 
       return ok(account)
     } catch (error) {
+      console.log(error)
       return serverError(error)
     }
   }
