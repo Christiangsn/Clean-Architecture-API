@@ -8,7 +8,7 @@ export class SignUpController implements ProtocolControllers {
   ) {}
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
-    const { name, email, password, passwordConfirm } = httpRequest.body
+    const { name, email, password } = httpRequest.body
 
     try {
       const error = this.validation.validate(httpRequest.body)

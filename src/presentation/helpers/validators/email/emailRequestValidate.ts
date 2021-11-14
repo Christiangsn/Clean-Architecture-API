@@ -1,6 +1,6 @@
 import { IInvalidParamsError } from '@presentation/errors'
 import { IEmailValidator } from '@presentation/protocol/emailValidator'
-import { IValidation } from './validation'
+import { IValidation } from '../validation'
 
 export class EmailValidate implements IValidation {
   constructor (
@@ -9,7 +9,6 @@ export class EmailValidate implements IValidation {
   ) { }
 
   validate (input: any): Error {
-    console.log(input)
     const isValid = this.emailValidator.isValid(input[this.fieldName])
     if (!isValid) {
       return new IInvalidParamsError(this.fieldName)

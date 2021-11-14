@@ -8,7 +8,6 @@ export class CompareFieldValidate implements IValidation {
   ) { }
 
   validate (input: any): Error {
-    console.log(input)
     console.log(this.fieldCompareName, this.fieldName)
     if (input[this.fieldName] !== input[this.fieldCompareName]) {
       return new IInvalidParamsError(this.fieldCompareName)
