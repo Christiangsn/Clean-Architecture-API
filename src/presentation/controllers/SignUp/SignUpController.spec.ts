@@ -1,6 +1,7 @@
 import { SignUpController } from './SignUp'
-import { IServerError } from '../../errors'
+import { IMissingParamError, IServerError } from '../../errors'
 import { AccountModel, AddAccountModel, AddAccount, IValidation } from './SignUpProtocols'
+import { badRequest } from '@presentation/helpers/httpHelper'
 
 interface SutTypes {
   sut: SignUpController
@@ -47,24 +48,6 @@ const makeSut = (): SutTypes => {
 
 describe('SignUpController', () => {
   // Erro de execeção
-  test('should call AddAccount with correct values', async () => {
-    const { sut, makeAccountStub } = makeSut()
-    const addSpy = jest.spyOn(makeAccountStub, 'add')
-    const hhtRequest = {
-      body: {
-        name: 'any',
-        email: 'any_email@mail.com',
-        password: 'password',
-        passwordConfirm: 'password'
-      }
-    }
-    await sut.handle(hhtRequest)
-    expect(addSpy).toHaveBeenCalledWith({
-      name: 'any',
-      email: 'any_email@mail.com',
-      password: 'password'
-    })
-  })
 
   test('should return 500 if AddAccount throws', async () => {
     const { sut, makeAccountStub } = makeSut()
@@ -125,18 +108,36 @@ describe('SignUpController', () => {
     expect(validateSpy).toHaveBeenCalledWith(hhtRequest.body)
   })
 
-  // test('should return 400 if Validation returns an error', async () => {
-  //   const { sut, validateStub } = makeSut()
-  //   jest.spyOn(validateStub, 'validate').mockReturnValueOnce(new IMissingParamError('any_field'))
-  //   const httpRequest = {
-  //     body: {
-  //       name: 'valid_name',
-  //       email: 'valid_email@mail.com',
-  //       password: 'valid_confirm_password',
-  //       passwordConfirm: 'valid_confirm_password'
-  //     }
-  //   }
-  //   const httpResponse = await sut.handle(httpRequest)
-  //   expect(httpResponse.body).toEqual(badRequest)
-  // })
+  test('should call AddAccount with correct values', async () => {
+    const { sut, makeAccountStub } = makeSut()
+    const addSpy = jest.spyOn(makeAccountStub, 'add')
+    const hhtRequest = {
+      body: {
+        name: 'any',
+        email: 'any_email@mail.com',
+        password: 'password',
+        passwordConfirm: 'password'
+      }
+    }
+    await sut.handle(hhtRequest)
+    expect(addSpy).toHaveBeenCalledWith({
+      name: 'any',
+      email: 'any_email@mail.com',
+      password: 'password'
+    })
+  })
+
+  test('should return 400 if Validation returns an error', async () => {
+    const { sut, validateStub } = makeSut()
+    jest.spyOn(validateStub, 'validate').mockReturnValueOnce(new IMissingParamError('any_field'))
+    const httpRequest = {
+      body: {
+        name: 'valid_name',
+        email: 'valid_email@mail.com',
+        password: 'valid_confirm_password'
+      }
+    }
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual(badRequest(new IMissingParamError('any_field')))
+  })
 })
