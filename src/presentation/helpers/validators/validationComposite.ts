@@ -1,4 +1,4 @@
-import { IValidation } from './validation'
+import { IValidation } from '../../protocol/validation'
 
 export class ValidationComposite implements IValidation {
   constructor (
