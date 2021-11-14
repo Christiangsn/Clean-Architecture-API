@@ -2,7 +2,7 @@ import { LoginController } from './loginController'
 import { anauthorized, badRequest, ok, serverError } from '../../helpers/http/httpHelper'
 import { IMissingParamError } from '@presentation/errors'
 import { IValidation } from '../SignUp/SignUpProtocols'
-import { Authentication } from '@domain/contracts/authentication'
+import { Authentication, AuthenticationModel } from '@domain/contracts/authentication'
 
 const makeValidation = (): IValidation => {
   class ValidationStub implements IValidation {
@@ -14,12 +14,12 @@ const makeValidation = (): IValidation => {
 }
 
 const makeAuthentication = (): Authentication => {
-  class EmailValidatorStub implements Authentication {
-    async auth (email: string, password: string): Promise<string> {
+  class AuthenticationStub implements Authentication {
+    async auth ({ email, password }: AuthenticationModel): Promise<string> {
       return 'any_token'
     }
   }
-  return new EmailValidatorStub()
+  return new AuthenticationStub()
 }
 
 interface SutTypes {
@@ -51,7 +51,10 @@ describe('', () => {
       }
     }
     await sut.handle(httpRequest)
-    expect(authSpy).toHaveBeenCalledWith('any_email@mail.com', 'any_password')
+    expect(authSpy).toHaveBeenCalledWith({
+      email: 'any_email@mail.com',
+      password: 'any_password'
+    })
   })
 
   test('Sould return 401 if an  invalid crendetials are provided', async () => {
