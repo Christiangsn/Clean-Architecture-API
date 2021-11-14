@@ -1,4 +1,4 @@
-import { AddAccountRepository } from '../../../../data/protocols/addAccountRepository'
+import { AddAccountRepository } from '../../../../data/protocols/database/addAccountRepository'
 import { AccountModel } from '@domain/contracts/addAccount'
 import { AddAccountModel } from '../../../../domain/contracts/addAccount'
 import { AddAccountFactory } from '@domain/factories/addAccount'

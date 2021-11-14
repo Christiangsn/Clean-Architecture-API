@@ -1,5 +1,5 @@
 import { Authentication, AuthenticationModel } from '@domain/contracts/authentication'
-import { loadAccountByEmailRepository } from '@data/protocols/loadAccountByEmailRepository'
+import { loadAccountByEmailRepository } from '@data/protocols/database/loadAccountByEmailRepository'
 
 export class DbAuthentication implements Authentication {
   constructor (
