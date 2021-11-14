@@ -1,4 +1,4 @@
-import { CompareFieldValidate } from '@presentation/helpers/validators/compareFieldsValidate'
+import { CompareFieldValidate } from '@presentation/helpers/validators/compare/compareFieldsValidate'
 import { EmailValidate } from '@presentation/helpers/validators/email/emailRequestValidate'
 import { RequiredFieldValidation } from '@presentation/helpers/validators/fields/requiredFieldValidate'
 import { IValidation } from '@presentation/helpers/validators/validation'
