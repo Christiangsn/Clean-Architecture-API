@@ -12,9 +12,7 @@ describe('Account SqLite Repository', () => {
   })
 
   beforeEach(async () => {
-    await db.client.user.updateMany({
-      data: {}
-    })
+    await db.client.user.deleteMany({})
   })
 
   const addFactory = (): AddAccountFactory => {
@@ -26,13 +24,30 @@ describe('Account SqLite Repository', () => {
     return new AccountPrismaRepository(factory)
   }
 
-  test('Should return an account on success', async () => {
+  test('Should return an account on add success', async () => {
     const sut = makeSut()
     const account = await sut.add({
       name: 'any_name',
       email: 'any_email@email.com',
       password: 'any_password'
     })
+    expect(account).toBeTruthy()
+    expect(account.id).toBeTruthy()
+    expect(account.name).toBe('any_name')
+    expect(account.email).toBe('any_email@email.com')
+    expect(account.password).toBe('any_password')
+  })
+
+  test('Should return an account on loadByEmail success', async () => {
+    const sut = makeSut()
+    await db.client.user.create({
+      data: {
+        name: 'any_name',
+        email: 'any_email@email.com',
+        password: 'any_password'
+      }
+    })
+    const account = await sut.loadByEmail('any_email@email.com')
     expect(account).toBeTruthy()
     expect(account.id).toBeTruthy()
     expect(account.name).toBe('any_name')
