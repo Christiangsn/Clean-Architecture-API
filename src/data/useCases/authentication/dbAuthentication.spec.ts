@@ -23,7 +23,7 @@ const makeLoadAccountByEmailRepository = (): loadAccountByEmailRepository => {
 const makeHashCompare = (): HashCompare => {
   class HashCompareStub implements HashCompare {
     async compare (value: string, hash: string): Promise<boolean> {
-      return true
+      return new Promise(resolve => resolve(true))
     }
   }
   return new HashCompareStub()
@@ -32,7 +32,7 @@ const makeHashCompare = (): HashCompare => {
 const makeTokenGenerator = (): TokenGenerator => {
   class TokenGeneratorStub implements TokenGenerator {
     async generate (id: string): Promise<string> {
-      return 'any_token'
+      return new Promise((resolve, reject) => resolve('any_token'))
     }
   }
   return new TokenGeneratorStub()
@@ -106,5 +106,12 @@ describe('DbAuthentication UseCase', () => {
     const generateSpy = jest.spyOn(tokenGeneratorStub, 'generate')
     await sut.auth({ email: 'any_mail@mail.com', password: 'any_password' })
     expect(generateSpy).toHaveBeenCalledWith('any_id')
+  })
+
+  test('Should throw if tokenGenerator throws', async () => {
+    const { sut, tokenGeneratorStub } = makeSut()
+    jest.spyOn(tokenGeneratorStub, 'generate').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    const promise = sut.auth({ email: 'any_mail@mail.com', password: 'any_password' })
+    await expect(promise).rejects.toThrow()
   })
 })
