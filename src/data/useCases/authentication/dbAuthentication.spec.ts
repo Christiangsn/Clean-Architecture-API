@@ -41,7 +41,7 @@ const makeTokenGenerator = (): TokenGenerator => {
 
 const makeUpdateAccessTokenRepository = (): UpdateAccessTokenRepository => {
   class UpdateAccessTokenRepositorStub implements UpdateAccessTokenRepository {
-    async updated (id: string, token: string): Promise<void> {
+    async updateAccessToken (id: string, token: string): Promise<void> {
       return new Promise((resolve, reject) => resolve())
     }
   }
@@ -136,14 +136,14 @@ describe('DbAuthentication UseCase', () => {
 
   test('Should call UpdateAcessTokenRepository with correct values', async () => {
     const { sut, updateAccessTokenRepositoryStub } = makeSut()
-    const updatedTokenSpy = jest.spyOn(updateAccessTokenRepositoryStub, 'updated')
+    const updatedTokenSpy = jest.spyOn(updateAccessTokenRepositoryStub, 'updateAccessToken')
     await sut.auth({ email: 'any_mail@mail.com', password: 'any_password' })
     expect(updatedTokenSpy).toHaveBeenCalledWith('any_id', 'any_token')
   })
 
   test('Should throw if UpdateAcessTokenRepository throws', async () => {
     const { sut, updateAccessTokenRepositoryStub } = makeSut()
-    jest.spyOn(updateAccessTokenRepositoryStub, 'updated').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    jest.spyOn(updateAccessTokenRepositoryStub, 'updateAccessToken').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
     const promise = sut.auth({ email: 'any_mail@mail.com', password: 'any_password' })
     await expect(promise).rejects.toThrow()
   })
