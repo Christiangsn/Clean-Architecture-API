@@ -1,6 +1,6 @@
 import { SignUpController } from '@presentation/controllers/SignUp/SignUp'
 import { DbAddAccount } from '@data/useCases/addAccount/dbAddAccount'
-import { BcryptAdapter } from '@infra/criptografy/bscryptAdapter'
+import { BcryptAdapter } from '@infra/criptografy/bcrypt/bscryptAdapter'
 import { AccountPrismaRepository } from '@infra/database/Prisma/AccountRepository/Account'
 import { LogPrismaRepository } from '@infra/database/Prisma/LogRepository/log'
 import { AddAccountFactory } from '@domain/factories/addAccount'
