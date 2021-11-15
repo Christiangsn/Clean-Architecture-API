@@ -14,9 +14,9 @@ module.exports = {
       ['module-resolver', {
         alias: {
           '@config': '',
-          '@domain': './src/models',
-          '@infra': './src/controllers',
-          '@presentation': './src/views',
+          '@domain': './src/domain',
+          '@infra': './src/infra',
+          '@presentation': './src/presentation',
           '@util': './src/util',
           '@data': './src/data',
           '@damin': './src/main'
@@ -24,6 +24,7 @@ module.exports = {
       }]
     ],
     ignore: [
-      '**/*.spec.ts'
+      '**/*.spec.ts',
+      '**/*.test.ts'
     ]
   }

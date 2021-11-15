@@ -9,7 +9,7 @@
   "scripts": {
     "studio": "npx prisma studio",
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
-    "start": "node -r dotenv/config dist/server.js",
+    "start": "node -r dotenv/config dist/main/server.js",
     "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify -r dotenv/config src/main/server.ts",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
     "test:verbose": "jest --passWithNoTests --runInBand",
@@ -59,7 +59,6 @@
     "bcrypt": "^5.0.1",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "fast-glob": "^3.2.7",
     "jsonwebtoken": "^8.5.1",
     "supertest": "^6.1.6",
     "validator": "^13.6.0"
