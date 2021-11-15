@@ -5,7 +5,7 @@ import { Prisma } from '../../infra/database/Prisma/helpers/prismaHelpers'
 import { AccountPrismaRepository } from '../../infra/database/Prisma/Account/AccountPrismRepository'
 import { AddAccountFactory } from '../../domain/factories/addAccount'
 
-describe('SignUp Routes', () => {
+describe('Login Routes', () => {
   beforeAll(async () => {
     await Prisma.connection()
   })
@@ -29,15 +29,17 @@ describe('SignUp Routes', () => {
     return new AccountPrismaRepository(factory)
   }
 
-  test('Should returns an account on success', async () => {
-    await request(app)
-      .post('/api/signup')
-      .send({
-        name: 'Christian',
-        email: 'christian@gmail.com',
-        password: '123',
-        passwordConfirm: '123'
-      })
-    expect(200)
+  describe('POST /signup', () => {
+    test('Should returns 200 on signup', async () => {
+      await request(app)
+        .post('/api/signup')
+        .send({
+          name: 'Christian',
+          email: 'christian@gmail.com',
+          password: '123',
+          passwordConfirm: '123'
+        })
+      expect(200)
+    })
   })
 })
