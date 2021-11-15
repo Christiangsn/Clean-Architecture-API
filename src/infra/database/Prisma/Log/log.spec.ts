@@ -1,6 +1,6 @@
 import { Prisma as db } from '../helpers/prismaHelpers'
 import { logsError } from '@prisma/client'
-import { LogPrismaRepository } from './log'
+import { LogPrismaRepository } from './logPrismaRepository'
 
 describe('Log Mongo Repository ', () => {
   // eslint-disable-next-line no-unused-vars

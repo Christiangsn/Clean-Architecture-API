@@ -1,10 +1,10 @@
-import { AddAccountRepository } from '../../../../data/protocols/database/addAccountRepository'
+import { AddAccountRepository } from '../../../../data/protocols/database/Account/addAccountRepository'
 import { AccountModel } from '@domain/contracts/addAccount'
 import { AddAccountModel } from '../../../../domain/contracts/addAccount'
 import { AddAccountFactory } from '@domain/factories/addAccount'
 import { Prisma } from '../helpers/prismaHelpers'
-import { loadAccountByEmailRepository } from '@data/protocols/database/loadAccountByEmailRepository'
-import { UpdateAccessTokenRepository } from '@data/protocols/database/updatedAccessTokenRepository'
+import { loadAccountByEmailRepository } from '@data/protocols/database/Account/loadAccountByEmailRepository'
+import { UpdateAccessTokenRepository } from '@data/protocols/database/Account/updatedAccessTokenRepository'
 
 export class AccountPrismaRepository implements AddAccountRepository, loadAccountByEmailRepository, UpdateAccessTokenRepository {
   constructor (private accountFactory: AddAccountFactory) {}

@@ -1,5 +1,5 @@
 import { Prisma as db } from '../helpers/prismaHelpers'
-import { AccountPrismaRepository } from './Account'
+import { AccountPrismaRepository } from './AccountPrismRepository'
 import { AddAccountFactory } from '../../../../domain/factories/addAccount'
 
 describe('Account SqLite Repository', () => {

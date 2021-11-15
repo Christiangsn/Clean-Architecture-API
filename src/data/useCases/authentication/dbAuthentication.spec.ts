@@ -1,7 +1,7 @@
 import { HashCompare } from '@data/protocols/criptografy/hash'
 import { TokenGenerator } from '@data/protocols/criptografy/token'
-import { loadAccountByEmailRepository } from '@data/protocols/database/loadAccountByEmailRepository'
-import { UpdateAccessTokenRepository } from '@data/protocols/database/updatedAccessTokenRepository'
+import { loadAccountByEmailRepository } from '@data/protocols/database/Account/loadAccountByEmailRepository'
+import { UpdateAccessTokenRepository } from '@data/protocols/database/Account/updatedAccessTokenRepository'
 import { AccountModel } from '../addAccount/dbAddAccountProtocols'
 import { DbAuthentication } from './dbAuthentication'
 

@@ -2,7 +2,7 @@
 import request from 'supertest'
 import app from '../app'
 import { Prisma } from '../../infra/database/Prisma/helpers/prismaHelpers'
-import { AccountPrismaRepository } from '../../infra/database/Prisma/AccountRepository/Account'
+import { AccountPrismaRepository } from '../../infra/database/Prisma/Account/AccountPrismRepository'
 import { AddAccountFactory } from '../../domain/factories/addAccount'
 
 describe('SignUp Routes', () => {
