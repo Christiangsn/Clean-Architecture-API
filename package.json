@@ -1,6 +1,6 @@
 {
   "name": "design-patterns-DDD-Registers",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Clean Node API",
   "main": "server.ts",
   "repository": "git@github.com:Christiangsn/ddd-designPatterns-registers.git",
