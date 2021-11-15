@@ -8,6 +8,6 @@ describe('Content Type Middleware', () => {
     })
     await request(app)
       .get('/api/test_content')
-      .expect('content-type', /json/)
+      .expect('Content-Type', 'application/json')
   })
 })

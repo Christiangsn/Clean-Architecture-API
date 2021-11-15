@@ -25,7 +25,7 @@ class LoginController implements ProtocolControllers {
       }
 
       return ok({
-        accessToken: 'any_token'
+        accessToken: accessToken
       })
     } catch (error) {
       return serverError(error)
