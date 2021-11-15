@@ -114,4 +114,10 @@ describe('DbAuthentication UseCase', () => {
     const promise = sut.auth({ email: 'any_mail@mail.com', password: 'any_password' })
     await expect(promise).rejects.toThrow()
   })
+
+  test('Should call tokenGenerator with correct id', async () => {
+    const { sut } = makeSut()
+    const acessToken = await sut.auth({ email: 'any_mail@mail.com', password: 'any_password' })
+    expect(acessToken).toBe('any_token')
+  })
 })
