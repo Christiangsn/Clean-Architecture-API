@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import request from 'supertest'
 import app from '../app'
 import { Prisma } from '../../infra/database/Prisma/helpers/prismaHelpers'
