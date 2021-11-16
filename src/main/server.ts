@@ -4,7 +4,7 @@ Prisma.connection()
   .then(async () => {
     console.log('Database is running...')
     const app = (await import('./app')).default
-    app.listen(process.env.APP_PORT, () => {
+    app.listen(process.env.APP_PORT || 5000, () => {
       console.log(`Server running at http://localhost:${process.env.APP_PORT}`)
     })
   })
