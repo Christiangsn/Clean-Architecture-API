@@ -1,7 +1,7 @@
 import { SignUpController } from './SignUp'
 import { IMissingParamError, IServerError } from '../../errors'
 import { AccountModel, AddAccountModel, AddAccount, IValidation } from './SignUpProtocols'
-import { badRequest, serverError } from '@presentation/helpers/http/httpHelper'
+import { badRequest, ok, serverError } from '@presentation/helpers/http/httpHelper'
 import { Authentication, AuthenticationModel } from '@domain/contracts/authentication'
 
 interface SutTypes {
@@ -99,12 +99,9 @@ describe('SignUpController', () => {
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse.statusCode).toBe(200)
 
-    expect(httpResponse.body).toEqual({
-      id: 'valid_id',
-      name: 'valid_name',
-      email: 'valid_email@mail.com',
-      password: 'valid_password'
-    })
+    expect(httpResponse).toEqual(ok({
+      accessToken: 'any_token'
+    }))
   })
 
   test('should call Validation with correct value', async () => {
