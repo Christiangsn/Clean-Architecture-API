@@ -1,6 +1,7 @@
 import { HttpRequest, HttpResponse, ProtocolControllers, AddAccount, IValidation } from './SignUpProtocols'
-import { badRequest, serverError, ok } from '../../helpers/http/httpHelper'
+import { badRequest, serverError, ok, forbidden } from '../../helpers/http/httpHelper'
 import { Authentication } from '@domain/contracts/authentication'
+import { IEmailInUseError } from '@presentation/errors/emailInUseError'
 
 export class SignUpController implements ProtocolControllers {
   constructor (
@@ -25,10 +26,13 @@ export class SignUpController implements ProtocolControllers {
         password
       })
 
+      if (!account) {
+        return forbidden(new IEmailInUseError())
+      }
+
       const accessToken = await this.authentication.auth({
         email, password
       })
-      console.log('aqui', accessToken)
 
       return ok({ accessToken })
     } catch (error) {
