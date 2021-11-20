@@ -1,5 +1,5 @@
 import { AddSurvey } from '@domain/contracts/addSurvey'
-import { badRequest, serverError } from '@presentation/helpers/http/httpHelper'
+import { badRequest, noContent, serverError } from '@presentation/helpers/http/httpHelper'
 import { HttpRequest, HttpResponse, ProtocolControllers } from '@presentation/protocol'
 import { IValidation } from '@presentation/protocol/validation'
 
@@ -24,7 +24,7 @@ export class AddSurveyController implements ProtocolControllers {
         answers: answers
       })
 
-      return null
+      return noContent()
     } catch (error) {
       return serverError(error)
     }
