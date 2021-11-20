@@ -19,7 +19,8 @@ module.exports = {
           '@presentation': './src/presentation',
           '@util': './src/util',
           '@data': './src/data',
-          '@damin': './src/main'
+          '@damin': './src/main',
+          '@main': './src/main',
         }
       }]
     ],

@@ -23,7 +23,8 @@
       "@infra/*": ["infra/*"],
       "@presentation/*": ["presentation/*"],
       "@util/*": ["util/*"],
-      "@data/*": ["data/*"]
+      "@data/*": ["data/*"],
+      "@main/*": ["main/*"]
     }
   },
   "include": [
