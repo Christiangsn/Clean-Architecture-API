@@ -140,12 +140,14 @@ describe('DbAddAccount UseCase', () => {
   test('Should call LoadAccountByEmailRepository with correct email', async () => {
     const { sut, loadAccountByEmailRepositoryStub } = makeSut()
     const loadSpy = jest.spyOn(loadAccountByEmailRepositoryStub, 'loadByEmail')
+
     const accountData = {
       name: 'valid_name',
       email: 'valid_email@mail.com',
       password: 'valid_password'
     }
+
     await sut.add(accountData)
-    expect(loadSpy).toHaveBeenCalledWith('any_mail@mail.com')
+    expect(loadSpy).toHaveBeenCalledWith('valid_email@mail.com')
   })
 })
