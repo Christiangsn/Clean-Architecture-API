@@ -1,5 +1,5 @@
 import { HttpRequest, HttpResponse, ProtocolControllers, AddAccount, IValidation } from './SignUpProtocols'
-import { badRequest, serverError, ok, forbidden } from '../../helpers/http/httpHelper'
+import { badRequest, serverError, ok, forbidden } from '../../../helpers/http/httpHelper'
 import { Authentication } from '@domain/contracts/authentication'
 import { IEmailInUseError } from '@presentation/errors/emailInUseError'
 

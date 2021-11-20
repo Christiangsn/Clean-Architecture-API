@@ -1,5 +1,5 @@
 import { SignUpController } from './SignUp'
-import { IMissingParamError, IServerError } from '../../errors'
+import { IMissingParamError, IServerError } from '../../../errors'
 import { AccountModel, AddAccountModel, AddAccount, IValidation } from './SignUpProtocols'
 import { badRequest, forbidden, ok, serverError } from '@presentation/helpers/http/httpHelper'
 import { Authentication, AuthenticationModel } from '@domain/contracts/authentication'
