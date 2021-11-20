@@ -1,5 +1,5 @@
 import { EmailValidate } from './emailRequestValidate'
-import { IEmailValidator } from '../../../protocol/emailValidator'
+import { IEmailValidator } from '../../protocols/emailValidator'
 
 interface SutTypes {
   sut: EmailValidate

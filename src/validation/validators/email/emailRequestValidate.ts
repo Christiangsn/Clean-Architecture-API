@@ -1,6 +1,6 @@
 import { IInvalidParamsError } from '@presentation/errors'
-import { IEmailValidator } from '@presentation/protocol/emailValidator'
-import { IValidation } from '../../../protocol/validation'
+import { IEmailValidator } from '@validation/protocols/emailValidator'
+import { IValidation } from '../../../presentation/protocol/validation'
 
 export class EmailValidate implements IValidation {
   constructor (

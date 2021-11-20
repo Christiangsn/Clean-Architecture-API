@@ -1,5 +1,5 @@
 import { IMissingParamError } from '@presentation/errors'
-import { IValidation } from '../../protocol/validation'
+import { IValidation } from '../../presentation/protocol/validation'
 import { ValidationComposite } from './validationComposite'
 
 const makeValidation = (): IValidation => {
