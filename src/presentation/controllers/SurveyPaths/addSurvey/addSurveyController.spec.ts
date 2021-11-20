@@ -1,5 +1,5 @@
 import { AddSurvey, AddSurveyModel } from '@domain/contracts/addSurvey'
-import { badRequest, serverError } from '@presentation/helpers/http/httpHelper'
+import { badRequest, noContent, serverError } from '@presentation/helpers/http/httpHelper'
 import { HttpRequest } from '@presentation/protocol'
 import { IValidation } from '@presentation/protocol/validation'
 import { AddSurveyController } from './addSurveyController'
@@ -82,5 +82,11 @@ describe('AddSurvey Controller', () => {
 
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(serverError(new Error()))
+  })
+
+  test('Should returns 204 on success', async () => {
+    const { sut } = makeSut()
+    const httpResponse = await sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(noContent())
   })
 })
