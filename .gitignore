@@ -7,4 +7,6 @@ package-lock.json
 docker-compose.yml
 Dockerfile
 .dockerignore
+/.env
 prisma/dev.db
+./prisma/migrations
