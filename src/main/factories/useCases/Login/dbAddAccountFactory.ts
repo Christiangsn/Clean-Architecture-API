@@ -9,5 +9,5 @@ export const makeDbAddAccount = (): AddAccount => {
   const bcryptAdapter = new BcryptAdapter(12)
   const addAccountFactory = new AddAccountFactory()
   const accountPrismaRepository = new AccountPrismaRepository(addAccountFactory)
-  return new DbAddAccount(bcryptAdapter, accountPrismaRepository)
+  return new DbAddAccount(bcryptAdapter, accountPrismaRepository, accountPrismaRepository)
 }
