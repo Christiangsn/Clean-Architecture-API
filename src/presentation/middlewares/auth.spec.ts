@@ -11,30 +11,36 @@ const makeFakeAccount = (): AccountModel => ({
   password: 'hash_password'
 })
 
+interface SutTypes {
+  sut: AuthMiddleware,
+  loadAccountByTokenStub: LoadAccountByToken
+}
+
+const makeSut = (): SutTypes => {
+  class LoadAccountByTokenStub implements LoadAccountByToken {
+    async load (accessToken: string, role?: string): Promise<AccountModel> {
+      return new Promise(resolve => resolve(makeFakeAccount()))
+    }
+  }
+  const loadAccountByTokenStub = new LoadAccountByTokenStub()
+  const sut = new AuthMiddleware(loadAccountByTokenStub)
+
+  return {
+    sut,
+    loadAccountByTokenStub
+  }
+}
+
 describe('Auth Middleware', () => {
   test('Should return 403 if no token exists in Authorization', async () => {
-    class LoadAccountByTokenStub implements LoadAccountByToken {
-      async load (accessToken: string, role?: string): Promise<AccountModel> {
-        return new Promise(resolve => resolve(makeFakeAccount()))
-      }
-    }
-
-    const loadAccountByTokenStub = new LoadAccountByTokenStub()
-    const sut = new AuthMiddleware(loadAccountByTokenStub)
+    const { sut } = makeSut()
     const httpResponse = await sut.handle({})
     expect(httpResponse).toEqual(forbidden(new IAccessDeniedError()))
   })
 
   test('Should calls LoadAccountByToken with correct accessToken', async () => {
-    class LoadAccountByTokenStub implements LoadAccountByToken {
-      async load (accessToken: string, role?: string): Promise<AccountModel> {
-        return new Promise(resolve => resolve(makeFakeAccount()))
-      }
-    }
-
-    const loadAccountByTokenStub = new LoadAccountByTokenStub()
+    const { sut, loadAccountByTokenStub } = makeSut()
     const loadSpy = jest.spyOn(loadAccountByTokenStub, 'load')
-    const sut = new AuthMiddleware(loadAccountByTokenStub)
     await sut.handle({
       headers: {
         Authorization: 'Bearer any_token'
