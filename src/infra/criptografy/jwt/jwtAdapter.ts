@@ -1,7 +1,8 @@
+import { DecrypterToken } from '@data/protocols/criptografy/decrypter'
 import { TokenGenerator } from '@data/protocols/criptografy/token'
 import jwt from 'jsonwebtoken'
 
-export class JwtAdapter implements TokenGenerator {
+export class JwtAdapter implements TokenGenerator, DecrypterToken {
   private readonly secret: string
 
   constructor (secret: string) {
@@ -16,5 +17,10 @@ export class JwtAdapter implements TokenGenerator {
       this.secret
     )
     return accessToken
+  }
+
+  async decrypt (token: string): Promise<string> {
+    await jwt.verify(token, this.secret)
+    return null
   }
 }
