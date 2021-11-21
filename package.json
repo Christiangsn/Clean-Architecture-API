@@ -7,6 +7,7 @@
   "author": "christianguimaraes1996@gmail.com",
   "license": "MIT",
   "scripts": {
+    "migration": "npx prisma migrate dev",
     "studio": "npx prisma studio",
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
     "start": "node -r dotenv/config dist/main/server.js",
