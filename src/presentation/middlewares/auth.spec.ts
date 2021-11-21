@@ -50,7 +50,7 @@ describe('Auth Middleware', () => {
     const { sut, loadAccountByTokenStub } = makeSut()
     const loadSpy = jest.spyOn(loadAccountByTokenStub, 'load')
     await sut.handle(makeFakeRequest())
-    expect(loadSpy).toHaveBeenCalledWith('Bearer any_token')
+    expect(loadSpy).toHaveBeenCalledWith('any_token')
   })
 
   test('Should return 401 if LoadAcountByToken returns invalid format token and for unauthorized', async () => {

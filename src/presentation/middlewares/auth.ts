@@ -31,7 +31,7 @@ export class AuthMiddleware implements ProtocolsMiddleware {
     }
 
     if (accessToken) {
-      const account = await this.loadAccountByToken.load(accessToken)
+      const account = await this.loadAccountByToken.load(token)
 
       if (account) {
         return ok({ accountId: account.id })
