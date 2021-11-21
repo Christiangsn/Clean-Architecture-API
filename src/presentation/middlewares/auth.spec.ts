@@ -2,7 +2,7 @@ import { LoadAccountByToken } from '@domain/contracts/accountByToken'
 import { AccountModel } from '@domain/contracts/addAccount'
 import { IAccessDeniedError } from '@presentation/errors/accessDeniedError'
 import { IInvalidTokenError } from '@presentation/errors/invalidTokenError'
-import { anauthorized, badRequest, forbidden, ok } from '@presentation/helpers/http/httpHelper'
+import { anauthorized, badRequest, forbidden, ok, serverError } from '@presentation/helpers/http/httpHelper'
 import { HttpRequest } from '@presentation/protocol'
 import { AuthMiddleware } from './auth'
 
@@ -86,5 +86,12 @@ describe('Auth Middleware', () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(ok({ accountId: 'valid_id' }))
+  })
+
+  test('Should return 500 if LoadAcountByToken thors', async () => {
+    const { sut, loadAccountByTokenStub } = makeSut()
+    jest.spyOn(loadAccountByTokenStub, 'load').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    const httpResponse = await sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(serverError(new Error()))
   })
 })
