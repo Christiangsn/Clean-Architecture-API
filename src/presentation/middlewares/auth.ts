@@ -8,7 +8,8 @@ import { ProtocolsMiddleware } from '../protocol/middleware'
 
 export class AuthMiddleware implements ProtocolsMiddleware {
   constructor (
-        private loadAccountByToken: LoadAccountByToken
+      private loadAccountByToken: LoadAccountByToken,
+      private role?: string
   ) {}
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
@@ -31,7 +32,7 @@ export class AuthMiddleware implements ProtocolsMiddleware {
         return badRequest(new IInvalidTokenError())
       }
 
-      const account = await this.loadAccountByToken.load(token)
+      const account = await this.loadAccountByToken.load(token, this.role)
 
       if (account) {
         return ok({ accountId: account.id })
