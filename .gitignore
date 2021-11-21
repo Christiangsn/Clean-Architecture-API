@@ -9,4 +9,4 @@ Dockerfile
 .dockerignore
 /.env
 prisma/dev.db
-./prisma/migrations
+/prisma/migrations
