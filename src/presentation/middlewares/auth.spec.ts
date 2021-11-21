@@ -1,7 +1,8 @@
 import { LoadAccountByToken } from '@domain/contracts/accountByToken'
 import { AccountModel } from '@domain/contracts/addAccount'
 import { IAccessDeniedError } from '@presentation/errors/accessDeniedError'
-import { anauthorized, forbidden, ok } from '@presentation/helpers/http/httpHelper'
+import { IInvalidTokenError } from '@presentation/errors/invalidTokenError'
+import { anauthorized, badRequest, forbidden, ok } from '@presentation/helpers/http/httpHelper'
 import { HttpRequest } from '@presentation/protocol'
 import { AuthMiddleware } from './auth'
 
@@ -69,6 +70,16 @@ describe('Auth Middleware', () => {
     jest.spyOn(loadAccountByTokenStub, 'load').mockReturnValueOnce(new Promise(resolve => resolve(null)))
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(forbidden(new IAccessDeniedError()))
+  })
+
+  test('Should return 400 if Bearer invalid returns BadRequest', async () => {
+    const { sut } = makeSut()
+    const httpResponse = await sut.handle({
+      headers: {
+        Authorization: 'Error any_token'
+      }
+    })
+    expect(httpResponse).toEqual(badRequest(new IInvalidTokenError()))
   })
 
   test('Should return 200 if LoadAcountByToken returns an account', async () => {
