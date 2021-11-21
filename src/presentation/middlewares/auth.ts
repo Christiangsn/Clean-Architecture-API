@@ -1,7 +1,8 @@
 /* eslint-disable dot-notation */
 import { LoadAccountByToken } from '@domain/contracts/accountByToken'
 import { IAccessDeniedError } from '@presentation/errors'
-import { anauthorized, forbidden, ok } from '@presentation/helpers/http/httpHelper'
+import { IInvalidTokenError } from '@presentation/errors/invalidTokenError'
+import { anauthorized, badRequest, forbidden, ok } from '@presentation/helpers/http/httpHelper'
 import { HttpRequest, HttpResponse } from '@presentation/protocol'
 import { ProtocolsMiddleware } from '../protocol/middleware'
 
@@ -21,6 +22,12 @@ export class AuthMiddleware implements ProtocolsMiddleware {
 
     if (parts.length !== 2) {
       return anauthorized()
+    }
+
+    const [scheme, token] = parts
+
+    if (!/^Bearer$/i.test(scheme)) {
+      return badRequest(new IInvalidTokenError())
     }
 
     if (accessToken) {
