@@ -24,3 +24,20 @@ model logsError {
 
   @@map("log_erros")
 }
+
+model Survey {
+  id              String       @id       @default(uuid())
+  question        String       
+  answers         SurveyAnswers[]
+
+}
+
+model SurveyAnswers {
+  id              String       @id       @default(uuid()) 
+  image           String?
+  answer          String
+
+  surveryId       String
+  surveyAnswer    Survey       @relation(fields: [surveryId], references: [id])
+  
+}
