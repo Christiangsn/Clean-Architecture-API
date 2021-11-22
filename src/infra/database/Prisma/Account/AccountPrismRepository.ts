@@ -5,8 +5,9 @@ import { AddAccountFactory } from '@domain/factories/addAccount'
 import { Prisma } from '../helpers/prismaHelpers'
 import { loadAccountByEmailRepository } from '@data/protocols/database/Account/loadAccountByEmailRepository'
 import { UpdateAccessTokenRepository } from '@data/protocols/database/Account/updatedAccessTokenRepository'
+import { LoadAccountByTokenRepository } from '@data/protocols/database/Account/loadAccountByTokenRepository'
 
-export class AccountPrismaRepository implements AddAccountRepository, loadAccountByEmailRepository, UpdateAccessTokenRepository {
+export class AccountPrismaRepository implements AddAccountRepository, loadAccountByEmailRepository, UpdateAccessTokenRepository, LoadAccountByTokenRepository {
   constructor (private accountFactory: AddAccountFactory) {}
 
   async add (accountData: AddAccountModel): Promise<AccountModel> {
@@ -33,5 +34,15 @@ export class AccountPrismaRepository implements AddAccountRepository, loadAccoun
         accessToken: token
       }
     })
+  }
+
+  async loadByToken (token: string, role?: string): Promise<AccountModel> {
+    const findAccount = await Prisma.client.user.findFirst({
+      where: {
+        accessToken: token,
+        role
+      }
+    })
+    return findAccount && this.accountFactory.addFactory(findAccount)
   }
 }
