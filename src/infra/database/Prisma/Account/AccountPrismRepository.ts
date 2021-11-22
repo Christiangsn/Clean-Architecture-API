@@ -40,7 +40,11 @@ export class AccountPrismaRepository implements AddAccountRepository, loadAccoun
     const findAccount = await Prisma.client.user.findFirst({
       where: {
         accessToken: token,
-        role
+        OR: [{
+          role
+        }, {
+          role: 'admin'
+        }]
       }
     })
     return findAccount && this.accountFactory.addFactory(findAccount)
