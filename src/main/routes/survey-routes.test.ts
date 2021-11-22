@@ -1,41 +1,24 @@
 /* eslint-disable no-unused-vars */
 import request from 'supertest'
 import app from '../app'
-import { Prisma } from '../../infra/database/Prisma/helpers/prismaHelpers'
-import { AccountPrismaRepository } from '../../infra/database/Prisma/Account/AccountPrismRepository'
-import { AddAccountFactory } from '../../domain/factories/addAccount'
-import { hash } from 'bcrypt'
+import { Prisma as db } from '../../infra/database/Prisma/helpers/prismaHelpers'
 
 describe('Login Routes', () => {
   beforeAll(async () => {
-    await Prisma.connection()
+    await db.connection()
   })
 
   afterAll(async () => {
-    await Prisma.disconnect()
+    await db.disconnect()
   })
 
   beforeEach(async () => {
-    await Prisma.client.surveyAnswers.deleteMany({})
-    await Prisma.client.survey.deleteMany({})
-  })
-
-  describe('POST /signup', () => {
-    test('Should returns 200 on signup', async () => {
-      await request(app)
-        .post('/api/signup')
-        .send({
-          name: 'Christian',
-          email: 'christian@gmail.com',
-          password: '123',
-          passwordConfirm: '123'
-        })
-      expect(200)
-    })
+    await db.client.surveyAnswers.deleteMany({})
+    await db.client.survey.deleteMany({})
   })
 
   describe('POST /surveys', () => {
-    test('Should returns 200 on add survey success', async () => {
+    test('Should returns 403 on add survey withou accessToken', async () => {
       await request(app)
         .post('/api/surveys')
         .send({
@@ -48,7 +31,7 @@ describe('Login Routes', () => {
             answer: 'Answer 1'
           }]
         })
-      expect(204)
+      expect(403)
     })
   })
 })

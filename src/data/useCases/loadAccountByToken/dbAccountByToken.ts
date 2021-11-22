@@ -1,5 +1,5 @@
 import { DecrypterToken } from '@data/protocols/criptografy/decrypter'
-import { LoadAccountByTokenRepository } from '@data/protocols/database/Account/loadAccountByTokenRepository copy'
+import { LoadAccountByTokenRepository } from '@data/protocols/database/Account/loadAccountByTokenRepository'
 import { LoadAccountByToken } from '@domain/contracts/accountByToken'
 import { AccountModel } from '../addAccount/dbAddAccountProtocols'
 
