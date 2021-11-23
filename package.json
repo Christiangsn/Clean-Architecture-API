@@ -19,6 +19,12 @@
     "test:staged": "yarn -r tsconfig-paths/register test -- --findRelatedTests",
     "test:ci": "yarn -r tsconfig-paths/register test -- --coverage"
   },
+  "husky": {
+    "hooks":{
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn run test:ci"
+    }
+  },
   "devDependencies": {
     "@babel/cli": "^7.16.0",
     "@babel/node": "^7.16.0",
