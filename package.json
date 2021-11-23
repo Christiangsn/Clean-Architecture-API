@@ -20,10 +20,15 @@
     "test:ci": "yarn -r tsconfig-paths/register test -- --coverage"
   },
   "husky": {
-    "hooks":{
-      "pre-commit": "lint-staged",
-      "pre-push": "yarn run test:ci"
+    "hooks": {
+      "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint 'src/**' --fix",
+      "cross-env CI=true yarn test:staged --bail"
+    ]
   },
   "devDependencies": {
     "@babel/cli": "^7.16.0",
@@ -39,6 +44,7 @@
     "@typescript-eslint/eslint-plugin": "^5.2.0",
     "@typescript-eslint/parser": "^5.2.0",
     "babel-plugin-module-resolver": "^4.1.0",
+    "cross-env": "^7.0.3",
     "eslint": "^8.1.0",
     "eslint-config-prettier": "^4.0.0",
     "eslint-config-standard": "^16.0.3",
