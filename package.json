@@ -18,11 +18,13 @@
     "test:integration": "yarn -r tsconfig-paths/register test -- --watch -c jest-integration-config.js",
     "test:staged": "yarn -r tsconfig-paths/register test -- --findRelatedTests",
     "test:ci": "yarn -r tsconfig-paths/register test -- --coverage",
+    "test:coveralls": "yarn test:ci && coveralls < coverage/lcov.info",
     "prepare": "husky install"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npx lint-staged"
+      "pre-commit": "npx lint-staged",
+      "pre-push": "yarn run test:ci"
     }
   },
   "lint-staged": {
@@ -45,6 +47,7 @@
     "@typescript-eslint/eslint-plugin": "^5.2.0",
     "@typescript-eslint/parser": "^5.2.0",
     "babel-plugin-module-resolver": "^4.1.0",
+    "coveralls": "^3.1.1",
     "cross-env": "^7.0.3",
     "eslint": "^8.1.0",
     "eslint-config-prettier": "^4.0.0",
