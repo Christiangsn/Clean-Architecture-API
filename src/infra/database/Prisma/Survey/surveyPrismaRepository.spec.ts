@@ -19,23 +19,29 @@ describe('Account SqLite Repository', () => {
     return new SurveyPrismaRepository()
   }
 
-  test('Should add an survey on success', async () => {
-    const sut = makeSut()
-    await sut.add({
-      question: 'any_question',
-      answers: [{
-        image: 'any_image',
-        answer: 'any_anwer'
-      }, {
-        answer: 'other_anwer'
-      }]
-    })
+  describe('Add()', () => {
+    test('Should add an survey on success', async () => {
+      const sut = makeSut()
+      await sut.add({
+        question: 'any_question',
+        answers: [{
+          image: 'any_image',
+          answer: 'any_anwer'
+        }, {
+          answer: 'other_anwer'
+        }]
+      })
 
-    const survey = await db.client.survey.findFirst({
-      where: {
-        question: 'any_question'
-      }
+      const survey = await db.client.survey.findFirst({
+        where: {
+          question: 'any_question'
+        }
+      })
+      expect(survey).toBeTruthy()
     })
-    expect(survey).toBeTruthy()
+  })
+
+  describe('Load()', () => {
+
   })
 })
