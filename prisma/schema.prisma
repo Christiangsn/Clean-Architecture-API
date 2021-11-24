@@ -28,17 +28,20 @@ model logsError {
 
 model Survey {
   id              String       @id       @default(uuid())
-  question        String       
-  answers         SurveyAnswers[]
+  question        String     
+  createdAt       DateTime               @default(now())
 
+
+  answers         SurveyAnswers[]
 }
 
 model SurveyAnswers {
   id              String       @id       @default(uuid()) 
   image           String?
   answer          String
+  createdAt       DateTime               @default(now())
 
   surveryId       String
-  surveyAnswer    Survey       @relation(fields: [surveryId], references: [id])
+  surveyAnswer    Survey                 @relation(fields: [surveryId], references: [id])
   
 }
