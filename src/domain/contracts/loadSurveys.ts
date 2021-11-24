@@ -15,6 +15,7 @@ export interface LoadSurveysInput {
 }
 
 export interface LoadSurveysModel {
+    id: string
     question: string
     createdAt: Date
     answers: LoadSurveyAnswerInput[]
