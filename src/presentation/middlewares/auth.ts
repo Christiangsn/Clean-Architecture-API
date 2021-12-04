@@ -16,6 +16,7 @@ export class AuthMiddleware implements ProtocolsMiddleware {
     const accessToken = httpRequest.headers?.['Authorization']
 
     try {
+      console.log('token aqui', accessToken)
       if (!accessToken) {
         return forbidden(new IAccessDeniedError())
       }

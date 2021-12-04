@@ -36,7 +36,7 @@ export class SignUpController implements ProtocolControllers {
 
       return ok({ accessToken })
     } catch (error) {
-      console.log(error)
+      // console.log(error)
       return serverError(error)
     }
   }

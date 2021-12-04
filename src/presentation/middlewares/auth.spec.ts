@@ -30,6 +30,7 @@ const makeSut = (role?: string): SutTypes => {
       return new Promise(resolve => resolve(makeFakeAccount()))
     }
   }
+
   const loadAccountByTokenStub = new LoadAccountByTokenStub()
   const sut = new AuthMiddleware(loadAccountByTokenStub, role)
 
