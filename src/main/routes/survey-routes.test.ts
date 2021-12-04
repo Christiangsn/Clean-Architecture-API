@@ -5,6 +5,29 @@ import { Prisma as db } from '../../infra/database/Prisma/helpers/prismaHelpers'
 import { sign } from 'jsonwebtoken'
 import { SurveysModel } from '@domain/contracts/loadSurveys'
 
+const makeAccessToken = async (): Promise<string> => {
+  const res = await db.client.user.create({
+    data: {
+      name: 'Christian',
+      email: 'christian@gmail.com',
+      password: '123'
+    }
+  })
+  const { id } = res
+  const accessToken = sign({ id }, process.env.SECRET)
+
+  await db.client.user.update({
+    where: {
+      id: id
+    },
+    data: {
+      accessToken: accessToken
+    }
+  })
+
+  return accessToken
+}
+
 const makeFakeSurveys = (): SurveysModel[] => {
   return [{
     id: 'any_id',
@@ -105,25 +128,8 @@ describe('Login Routes', () => {
     })
 
     test('Should returns 200 on load surveys with valid accessToken', async () => {
+      const accessToken = await makeAccessToken()
       const surveysInsert = makeFakeSurveys()
-      const res = await db.client.user.create({
-        data: {
-          name: 'Christian',
-          email: 'christian@gmail.com',
-          password: '123'
-        }
-      })
-      const { id } = res
-      const accessToken = sign({ id }, process.env.SECRET)
-
-      await db.client.user.update({
-        where: {
-          id: id
-        },
-        data: {
-          accessToken: accessToken
-        }
-      })
 
       for (const survey of surveysInsert) {
         db.client.survey.create({
